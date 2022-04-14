@@ -2,7 +2,11 @@
 
 <div>
   
+  <%= link_to post_image_path(post_image.id) do %>
+  
   <%= image_tag post_image.get_image %>
+  
+  <% end %>
   
   <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
   
@@ -11,6 +15,8 @@
   <p>説明：<%= post_image.caption %></p>
   
   <p>ユーザーネーム：<%= post_image.user.name %></p>
+  
+  <p></p>
   
 </div>
 
