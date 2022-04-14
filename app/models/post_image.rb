@@ -10,11 +10,12 @@ class PostImage < ApplicationRecord
       
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       
-      image.attached(io: File.open(file_path), filename: 'defalt-image.jpg', content_type: 'image/jpeg')
+      image.attach(io: File.open(file_path), filename: 'defalt-image.jpg', content_type: 'image/jpeg')
       
     end
     
     image
+    
   end
   
 end
