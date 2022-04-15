@@ -6,6 +6,8 @@ class PostImage < ApplicationRecord
   
   has_many :post_coments, dependent: :destroy
   
+  has_many :favorites, dependent: :destroy
+  
   def get_image
     
     unless image.attached?
@@ -17,6 +19,12 @@ class PostImage < ApplicationRecord
     end
     
     image
+    
+  end
+  
+  def favorited_by?(user)
+    
+    favorites.exists?(user_id: user.id)
     
   end
   
