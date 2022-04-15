@@ -6,7 +6,7 @@
 
   <P>説明:<%= @post_image.caption %></P>
 
-  <P>投稿ユーザー画像:<%= image_tag 'sample-author1.jpg' %></P>
+  <P>投稿ユーザー画像:<%= image_tag @post_image.user.get_profile_image(100,100) %></P>
 
   <p>ユーザーネーム:<%= @post_image.user.name %></p>
 
@@ -18,4 +18,38 @@
 
   <% end %>
 
+</div>
+
+<div>
+  
+  <P>コメント件数:<%= @post_image.post_coments.count %></P>
+  
+  <% @post_image.post_coments.each do |post_coment| %>
+  
+    <P><%= image_tag post_coment.user.get_profile_image(100,100) %></P>
+  
+    <%= post_coment.user.name %>
+  
+    <%= post_coment.created_at.strftime('%Y/%m/%d') %><%= post_coment.comment %>
+    
+    <% if post_coment.user == current_user %>
+    
+      <%= link_to "削除", post_image_post_coment_path(post_coment.post_image, post_coment), method: :delete %>
+      
+    <% end %>
+  
+  <% end %>
+  
+</div>
+
+<div>
+  
+  <%= form_with model: [@post_image, @post_coment] do |f| %>
+  
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    
+    <%= f.submit "送信する" %>
+    
+  <% end %>
+  
 </div>
